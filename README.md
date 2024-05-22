@@ -38,7 +38,7 @@ So now that we have our problem, we will implement our model for further analysi
 
 **Logic:** The solution utilizes dynamic programming to find the maximum number of lectures that can be conducted during the boot camp while adhering to the given constraints.
 
-# Flow:
+#### Flow:
 
 Initialize a 2D array dp to store the maximum number of lectures for each day considering the current day's lecture count and the previous day's lecture count.
 
