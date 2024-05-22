@@ -38,6 +38,53 @@ So now that we have our problem, we will implement our model for further analysi
 
 **Logic:** The solution utilizes dynamic programming to find the maximum number of lectures that can be conducted during the boot camp while adhering to the given constraints.
 
-**Flow:**
+# Flow:
 
-**Input:** n (Number of days), k1 (Max lectures per day), k2 (Max lectures for consecutive days), days (Excursion days)
+Initialize a 2D array dp to store the maximum number of lectures for each day considering the current day's lecture count and the previous day's lecture count.
+
+Iterate through each day and for each day, iterate through possible lecture counts up to k1.
+
+If it's an excursion day, update dp[i][0] by taking the maximum between the current maximum lecture count and the previous day's maximum lecture count.
+
+If it's not an excursion day, iterate through possible lecture counts up to k1 for the previous day, and update dp[i][j] by taking the maximum between the current maximum lecture count and the sum of the lecture count for the previous day and the current day (if it doesn't exceed k2).
+
+Finally, return the maximum lecture count from the last day.
+
+Input: n (Number of days), k1 (Max lectures per day), k2 (Max lectures for consecutive days), days (Excursion days)
+
+Initialize 2D array dp[n+1][k1+1]
+
+         k1
+     0  1  2  ... k1
+   ___________________
+ 0 | 0  0  0  ... 0   | 
+   |_________________|
+ 1 | -  -  -  ... -   | Day 1
+   |_________________|
+ 2 | -  -  -  ... -   | Day 2
+   |_________________|
+ . |    ...           |
+ . |_________________|
+ . |    ...           |
+   |_________________|
+n-1| -  -  -  ... -   | Day n-1
+   |_________________|
+ n | -  -  -  ... -   | Day n
+   |_________________|
+
+Iterate through each day (i = 1 to n):
+    If day i is an excursion day:
+        Iterate through lecture counts for day i (j = 0 to k1):
+            Update dp[i][0] by taking max(dp[i][0], dp[i-1][j])
+    Else (day i is not an excursion day):
+        Iterate through lecture counts for previous day (k = 0 to k1):
+            Iterate through lecture counts for day i (j = 0 to k1):
+                If sum of lectures for previous day and current day <= k2:
+                    Update dp[i][j] by taking max(dp[i][j], dp[i-1][k] + j)
+
+Return max value from last row of dp array as maximum possible lectures
+This diagram illustrates how the dynamic programming approach works to find the maximum number of lectures that can be conducted during the boot camp while satisfying the given constraints.
+
+## Implementation:
+
+### Import Statements:
