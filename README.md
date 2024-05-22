@@ -108,7 +108,7 @@ This defines a function calculate_max_lectures that takes four arguments: n (num
 
 ## Dynamic Programming Initialization
 
-```
+```python
 dp = [[-1] * (k1 + 1) for _ in range(n + 1)]
 dp[0][0] = 0
 ```
