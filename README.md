@@ -188,3 +188,27 @@ if __name__ == "__main__":
 ```
 
 Ensures that the main() function is executed when the script is run directly, not when it's imported as a module.
+
+# Testing
+
+In this code you can copy and paste the following inputs and see if the output is the one we expect:
+
+```python
+4
+4 5 7
+1011
+4 4 10
+0101
+5 3 4
+11011
+6 4 6
+011101
+```
+
+Expected output:
+```python
+12
+8
+8
+14
+```
