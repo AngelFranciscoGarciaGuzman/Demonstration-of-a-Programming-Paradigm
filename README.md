@@ -212,3 +212,22 @@ Expected output:
 8
 14
 ```
+
+## Complexity Analysis
+
+### calculate_max_lectures Function:
+- The function iterates over each day (n iterations).
+- For each day, it iterates over each possible number of lectures (k1 iterations).
+- In the worst case, it iterates over each possible combination of lectures for each day (k1 * k1 iterations).
+- So, the time complexity of this function is O(n * k1^2).
+
+### process_test_case Function:
+- This function simply calls `calculate_max_lectures` with the provided test case.
+- Since it's a simple function call, its time complexity is the same as `calculate_max_lectures`, which is O(n * k1^2).
+
+### main Function:
+- It reads input and creates test cases, which takes O(t * n) where t is the number of test cases and n is the number of days in each test case.
+- It then uses ThreadPoolExecutor to concurrently process the test cases. Each test case processing is independent of others, so the overall time complexity remains O(t * n * k1^2).
+- ThreadPoolExecutor itself introduces additional overhead, but assuming the number of test cases and the number of days are large enough, this overhead can be ignored in comparison to the complexity of `calculate_max_lectures`.
+
+Overall, the time complexity of the provided code is O(t * n * k1^2), where t is the number of test cases, n is the number of days, and k1 is the maximum number of lectures that can be skipped in a day.
