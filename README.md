@@ -32,7 +32,7 @@ The output for each test case is one integer — the maximum possible value of m
 
 So now that we have our problem, we will implement our model for further analysis.
 
-### Model:
+# Model:
 
 #### Implementation:
 
