@@ -84,9 +84,107 @@ Iterate through each day (i = 1 to n):
                     Update dp[i][j] by taking max(dp[i][j], dp[i-1][k] + j)
 ```
 
-Return max value from last row of dp array as maximum possible lectures
+Return max value from last row of dp array as maximum possible lectures.
+
 This diagram illustrates how the dynamic programming approach works to find the maximum number of lectures that can be conducted during the boot camp while satisfying the given constraints.
 
-## Implementation:
+# Implementation
 
-### Import Statements:
+## Import Statements
+
+\```python
+import concurrent.futures
+\```
+
+This imports the concurrent.futures module, which provides a high-level interface for asynchronously executing callables.
+
+## Function Definition: calculate_max_lectures
+
+\```python
+def calculate_max_lectures(n, k1, k2, days):
+\```
+
+This defines a function calculate_max_lectures that takes four arguments: n (number of days), k1 (maximum lectures per day), k2 (maximum lectures for consecutive days), and days (string representing excursion days).
+
+## Dynamic Programming Initialization
+
+\```python
+dp = [[-1] * (k1 + 1) for _ in range(n + 1)]
+dp[0][0] = 0
+\```
+
+This initializes a 2D array dp of size (n+1) x (k1+1) with all values set to -1, and sets dp[0][0] to 0.
+
+## Dynamic Programming Loop
+
+\```python
+for i in range(1, n + 1):
+    if days[i - 1] == '0':
+        for j in range(k1 + 1):
+            dp[i][0] = max(dp[i][0], dp[i - 1][j])
+    else:
+        for j in range(k1 + 1):
+            for k in range(k1 + 1):
+                if j + k <= k2 and dp[i - 1][k] != -1:
+                    dp[i][j] = max(dp[i][j], dp[i - 1][k] + j)
+\```
+
+This loop iterates over each day (i) from 1 to n. If days[i-1] is '0', it's an excursion day, so it updates dp[i][0] by considering the maximum lectures from the previous day. If days[i-1] is '1', it's not an excursion day, so it iterates over lecture counts for the previous day (k) and current day (j). It updates dp[i][j] if the sum of lectures for consecutive days does not exceed k2 and if the previous day's lecture count is valid.
+
+## Return Maximum Result
+
+\```python
+return max(dp[n])
+\```
+
+Finally, it returns the maximum number of lectures from the last day.
+
+## Function Definition: process_test_case
+
+\```python
+def process_test_case(test_case):
+    n, k1, k2, days = test_case
+    return calculate_max_lectures(n, k1, k2, days)
+\```
+
+This function takes a single test case tuple as input, extracts the parameters, and calls calculate_max_lectures function.
+
+## Main Function
+
+\```python
+def main():
+    ...
+\```
+
+The main() function orchestrates the input reading, test case processing, and output printing.
+
+## Input Processing
+
+Reads the number of test cases t, and for each test case, reads n, k1, k2, and days.
+
+## Parallel Execution
+
+\```python
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    results = list(executor.map(process_test_case, test_cases))
+\```
+
+Utilizes a ThreadPoolExecutor to concurrently execute the process_test_case function for each test case.
+
+## Output Printing
+
+\```python
+for result in results:
+    print(result)
+\```
+
+Prints the result of each test case.
+
+## Main Invocation
+
+\```python
+if __name__ == "__main__":
+    main()
+\```
+
+Ensures that the main() function is executed when the script is run directly, not when it's imported as a module.
