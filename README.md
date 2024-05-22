@@ -54,6 +54,7 @@ Input: n (Number of days), k1 (Max lectures per day), k2 (Max lectures for conse
 
 Initialize 2D array dp[n+1][k1+1]
 
+```
          k1
      0  1  2  ... k1
    ___________________
@@ -81,6 +82,7 @@ Iterate through each day (i = 1 to n):
             Iterate through lecture counts for day i (j = 0 to k1):
                 If sum of lectures for previous day and current day <= k2:
                     Update dp[i][j] by taking max(dp[i][j], dp[i-1][k] + j)
+```
 
 Return max value from last row of dp array as maximum possible lectures
 This diagram illustrates how the dynamic programming approach works to find the maximum number of lectures that can be conducted during the boot camp while satisfying the given constraints.
