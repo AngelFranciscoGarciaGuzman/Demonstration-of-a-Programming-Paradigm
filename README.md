@@ -92,26 +92,26 @@ This diagram illustrates how the dynamic programming approach works to find the 
 
 ## Import Statements
 
-\```
+```python
 import concurrent.futures
-\```
+```
 
 This imports the concurrent.futures module, which provides a high-level interface for asynchronously executing callables.
 
 ## Function Definition: calculate_max_lectures
 
-\```python
+```python
 def calculate_max_lectures(n, k1, k2, days):
-\```
+```
 
 This defines a function calculate_max_lectures that takes four arguments: n (number of days), k1 (maximum lectures per day), k2 (maximum lectures for consecutive days), and days (string representing excursion days).
 
 ## Dynamic Programming Initialization
 
-\```
+```
 dp = [[-1] * (k1 + 1) for _ in range(n + 1)]
 dp[0][0] = 0
-\```
+```
 
 This initializes a 2D array dp of size (n+1) x (k1+1) with all values set to -1, and sets dp[0][0] to 0.
 
