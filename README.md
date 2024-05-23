@@ -275,7 +275,7 @@ String Handling:
 
 Python: Strings are simple and slicing is straightforward.
 C++: Strings require explicit handling, and slicing is done using substrings or direct indexing.
-Concurrency:
+Concurrency: 
 
 Python: Uses concurrent.futures.ThreadPoolExecutor for parallel execution.
 C++: Uses std::async and std::future for parallel execution.
@@ -283,3 +283,7 @@ Input/Output:
 
 Python: Uses input() for reading and print() for output.
 C++: Uses cin for reading and cout for output.
+
+# References
+
+Problem 1346 B - Bootcamp: https://codeforces.com/problemset/problem/1346/B
