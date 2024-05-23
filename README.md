@@ -231,3 +231,55 @@ Expected output:
 - ThreadPoolExecutor itself introduces additional overhead, but assuming the number of test cases and the number of days are large enough, this overhead can be ignored in comparison to the complexity of `calculate_max_lectures`.
 
 Overall, the time complexity of the provided code is O(t * n * k1^2), where t is the number of test cases, n is the number of days, and k1 is the maximum number of lectures that can be skipped in a day.
+
+## Other Implementations (C++)
+
+We can also solve this problem but instead of using Python we can use C++.
+
+The code will look something like this:
+
+```c++
+int calculate_max_lectures(int n, int k1, int k2, const string &days) {
+    // dp[i][j] represents the maximum number of lectures for the first i days,
+    // where j is the number of lectures on the i-th day.
+    vector<vector<int>> dp(n + 1, vector<int>(k1 + 1, -1));
+    dp[0][0] = 0;
+
+    for (int i = 1; i <= n; ++i) {
+        if (days[i - 1] == '0') {
+            for (int j = 0; j <= k1; ++j) {
+                dp[i][0] = max(dp[i][0], dp[i - 1][j]);
+            }
+        } else {
+            for (int j = 0; j <= k1; ++j) {
+                for (int k = 0; k <= k1; ++k) {
+                    if (j + k <= k2 && dp[i - 1][k] != -1) {
+                        dp[i][j] = max(dp[i][j], dp[i - 1][k] + j);
+                    }
+                }
+            }
+        }
+    }
+
+    return *max_element(dp[n].begin(), dp[n].end());
+}
+```
+
+### Differences Between Python and C++
+
+#### Data Structures:
+
+Python: Uses dynamic and flexible structures like lists ([]) for the dp array.
+C++: Uses fixed-size structures like vectors (vector<vector<int>>) for the dp array.
+String Handling:
+
+Python: Strings are simple and slicing is straightforward.
+C++: Strings require explicit handling, and slicing is done using substrings or direct indexing.
+Concurrency:
+
+Python: Uses concurrent.futures.ThreadPoolExecutor for parallel execution.
+C++: Uses std::async and std::future for parallel execution.
+Input/Output:
+
+Python: Uses input() for reading and print() for output.
+C++: Uses cin for reading and cout for output.
